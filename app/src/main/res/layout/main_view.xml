@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TabHost   xmlns:android="http://schemas.android.com/apk/res/android"
-           android:id="@+id/tabHost"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           >
-    <LinearLayout android:orientation="horizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="match_parent">
-        <TabWidget android:id="@android:id/tabs"
-                   android:layout_height="wrap_content"
-                   android:layout_width="wrap_content"
-                   android:showDividers="end"
-                   android:divider="@color/tab_item_stroke"
-                   android:layout_weight="0" />
-        <FrameLayout android:id="@android:id/tabcontent"
-                     android:layout_height="match_parent"
-                     android:layout_width="0dip"
-                     android:layout_weight="1"
-                     />
+<TabHost android:id="@+id/tabHost"
+         xmlns:android="http://schemas.android.com/apk/res/android"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TabWidget
+            android:id="@android:id/tabs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:divider="@color/tab_item_stroke"
+            android:showDividers="end"/>
+        </ScrollView>
+        <FrameLayout
+            android:id="@android:id/tabcontent"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <com.tonicartos.widget.stickygridheaders.StickyGridHeadersGridView
+                android:id="@+id/asset_grid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:numColumns="3"
+                android:padding="16dp"/>
+        </FrameLayout>
     </LinearLayout>
 </TabHost>
