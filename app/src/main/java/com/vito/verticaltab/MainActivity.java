@@ -10,6 +10,10 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         VerticalTabView tabView = new VerticalTabView(this);
+
         tabView.initVerticalTabView();
     }
+
+
+
 }

@@ -7,36 +7,53 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "TabInfo"
+        "itemName",
+        "itemImage"
 })
-public class TabContentBean {
+public class ContentBody {
 
-    @JsonProperty("TabInfo")
-    private List<TabInfo> tabInfo = new ArrayList<TabInfo>();
+    @JsonProperty("itemName")
+    private String itemName;
+    @JsonProperty("itemImage")
+    private String itemImage;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
-     * @return The tabInfo
+     * @return The itemName
      */
-    @JsonProperty("TabInfo")
-    public List<TabInfo> getTabInfo() {
-        return tabInfo;
+    @JsonProperty("itemName")
+    public String getItemName() {
+        return itemName;
     }
 
     /**
-     * @param tabInfo The TabInfo
+     * @param itemName The itemName
      */
-    @JsonProperty("TabInfo")
-    public void setTabInfo(List<TabInfo> tabInfo) {
-        this.tabInfo = tabInfo;
+    @JsonProperty("itemName")
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    /**
+     * @return The itemImage
+     */
+    @JsonProperty("itemImage")
+    public String getItemImage() {
+        return itemImage;
+    }
+
+    /**
+     * @param itemImage The itemImage
+     */
+    @JsonProperty("itemImage")
+    public void setItemImage(String itemImage) {
+        this.itemImage = itemImage;
     }
 
     @JsonAnyGetter

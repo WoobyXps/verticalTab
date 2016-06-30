@@ -11,7 +11,7 @@ import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
 /**
  * Created by pc on 2016/6/30.
  */
-public class TabContentAdapter extends BaseViewAdapter<TabContentBean> implements StickyGridHeadersSimpleAdapter {
+public class TabContentAdapter extends BaseViewAdapter<ContentBody> implements StickyGridHeadersSimpleAdapter {
     public TabContentAdapter(Context context, int layoutId) {
         super(context, layoutId);
         mInflater = LayoutInflater.from(context);
@@ -54,8 +54,8 @@ public class TabContentAdapter extends BaseViewAdapter<TabContentBean> implement
         } else
             viewholder = (ViewHolder) convertView.getTag();
 
-        TabContentBean tempbean = getItem(position);
-        viewholder.titleView.setText(tempbean.getTitle());
+        ContentBody tempbean = getItem(position);
+        viewholder.titleView.setText(tempbean.getItemName());
         return convertView;
     }
 

@@ -1,0 +1,89 @@
+{
+  "TabInfo": [
+    {
+      "tabWidget": "水果蔬菜",
+      "tabContent": [
+        {
+          "contentHead": "水果",
+          "contentBody": [
+            {
+              "itemName": "苹果",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2560/274/768172012/6706/f9b6c3a7/5667d32fN5f8f1011.jpg"
+            },
+            {
+              "itemName": "梨",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2533/262/787808912/6010/40733665/5667d356Nf777f623.jpg"
+            },
+            {
+              "itemName": "瓜类",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2278/326/1556984236/9730/c7f105bd/5667ccd2N0450c91b.jpg"
+            },
+            {
+              "itemName": "猕猴桃",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2305/263/1638359679/9181/2a72397b/5667d3d3N2b7b06d7.jpg"
+            },
+            {
+              "itemName": "柑桔柚",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2425/269/1616879450/7884/c272ecf8/5667d406N267fecc2.jpg"
+            },
+            {
+              "itemName": "更多水果",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2317/191/1854658520/6492/6d88fd67/56849dc6N99ea3ed0.jpg"
+            }
+          ]
+        },
+        {
+          "contentHead": "蔬菜",
+          "contentBody": [
+            {
+              "itemName": "香菜",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t1975/255/1679445558/7792/a6633563/5667e8e2Na14b8460.jpg"
+            },
+            {
+              "itemName": "辣青椒",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2359/45/1654355453/9193/f087a277/5667e647N78c4e992.jpg"
+            },
+            {
+              "itemName": "嫩芹菜",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2260/230/1663803339/7989/1af4a95e/5667e67aN4d91f99b.jpg"
+            },
+            {
+              "itemName": "扁豆",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2023/33/1637936887/8260/cd5ca219/5667e92cNb93a88b4.jpg"
+            },
+            {
+              "itemName": "茄子",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2428/85/1618053661/8029/66950c8a/5667e903Nd2700fa1.jpg"
+            },
+            {
+              "itemName": "黄瓜",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2293/86/1734153157/6582/bb052385/56d7f98aN81a37e15.jpg"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "tabWidget": "肉禽蛋奶",
+      "tabContent": [
+        {
+          "contentHead": "牛羊猪禽",
+          "contentBody": [
+            {
+              "itemName": "牛肉",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2362/189/1713690186/6760/97de0c8/5667ea27Nf397f01f.jpg"
+            },
+            {
+              "itemName": "羊肉",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2518/73/539661608/8969/2f83ed0b/565552a9N6f342b32.jpg"
+            },
+            {
+              "itemName": "猪肉",
+              "itemImage": "https://img30.360buyimg.com/mobilecms/jfs/t2329/202/1237133249/7584/448ca3ed/564ac9c7Nc1b0980c.jpg"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

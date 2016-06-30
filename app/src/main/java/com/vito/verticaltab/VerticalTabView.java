@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.GridView;
@@ -15,6 +16,7 @@ import android.widget.TabWidget;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pc on 2016/6/30.
@@ -31,32 +33,27 @@ public class VerticalTabView implements TabHost.TabContentFactory {
     public void initVerticalTabView() {
         final TabHost tabHost = (TabHost) mContext.findViewById(R.id.tabHost);
         tabHost.setup();
+        JsonLoader jsonLoader = new JsonLoader(mContext);
+        TabContentBean contentBean = jsonLoader.genContentWithLocalJson();
 
-        initTabWidget(tabHost);
-        initTabContentAdapter();
+        initTabWidget(tabHost,contentBean);
+//        initTabContentAdapter();
         mTabContentGridView = (GridView) mContext.findViewById(R.id.asset_grid);
-        mTabContentGridView.setAdapter(mTabContentAdapter);
+//        mTabContentGridView.setAdapter(mTabContentAdapter);
     }
 
-    private void initTabWidget(final TabHost tabHost) {
+    private void initTabWidget(final TabHost tabHost ,TabContentBean contentBean) {
 
         TabWidget tw = tabHost.getTabWidget();
+
         tw.setOrientation(LinearLayout.VERTICAL);
-        tabHost.addTab(tabHost.newTabSpec("tab1")
-                .setIndicator(createIndicatorView(tabHost, "水果蔬菜", null))
-                .setContent(this));
-        tabHost.addTab(tabHost.newTabSpec("tab2")
-                .setIndicator(createIndicatorView(tabHost, "肉禽蛋奶", null))
-                .setContent(this));
-        tabHost.addTab(tabHost.newTabSpec("tab3")
-                .setIndicator(createIndicatorView(tabHost, "冷热素食", null))
-                .setContent(this));
-        tabHost.addTab(tabHost.newTabSpec("tab4")
-                .setIndicator(createIndicatorView(tabHost, "休闲食品", null))
-                .setContent(this));
-        tabHost.addTab(tabHost.newTabSpec("tab5")
-                .setIndicator(createIndicatorView(tabHost, "酒水饮料", null))
-                .setContent(this));
+        Log.d("qh","size : " + contentBean.getTabInfo().size());
+
+        for (int i=0;i<contentBean.getTabInfo().size();i++){
+            TabInfo tabInfo =   contentBean.getTabInfo().get(i);
+            Log.d("qh",tabInfo.getTabWidget());
+            tabHost.addTab(tabHost.newTabSpec("tab"+i).setIndicator(createIndicatorView(tabHost,tabInfo.getTabWidget(),null)).setContent(this));
+        }
         updateTab(tabHost);
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
@@ -66,24 +63,24 @@ public class VerticalTabView implements TabHost.TabContentFactory {
         });
     }
 
-    private void initTabContentAdapter() {
+    public void initTabContentAdapter(List<ContentBody> list) {
         mTabContentAdapter = new TabContentAdapter(mContext, R.layout.item);
-        ArrayList<TabContentBean> list = new ArrayList<>();
-        TabContentBean bean1 = new TabContentBean();
-        bean1.setTitle("AAAA");
-        TabContentBean bean2 = new TabContentBean();
-        bean2.setTitle("BBBB");
-        TabContentBean bean3 = new TabContentBean();
-        bean3.setTitle("CCCC");
-        list.add(bean1);
-        list.add(bean2);
-        list.add(bean3);
-        list.add(bean3);
-        list.add(bean3);
-        list.add(bean3);
-        list.add(bean3);
-
-        mTabContentAdapter.setData(list);
+//        ArrayList<TabContentBean> list = new ArrayList<>();
+//        TabContentBean bean1 = new TabContentBean();
+//        bean1.setTitle("AAAA");
+//        TabContentBean bean2 = new TabContentBean();
+//        bean2.setTitle("BBBB");
+//        TabContentBean bean3 = new TabContentBean();
+//        bean3.setTitle("CCCC");
+//        list.add(bean1);
+//        list.add(bean2);
+//        list.add(bean3);
+//        list.add(bean3);
+//        list.add(bean3);
+//        list.add(bean3);
+//        list.add(bean3);
+//
+//        mTabContentAdapter.setData();
     }
 
     /**
@@ -134,5 +131,8 @@ public class VerticalTabView implements TabHost.TabContentFactory {
     public View createTabContent(String tag) {
         final TextView tv = new TextView(mContext);
         return tv;
+    }
+
+    private void getDateFromJson(){
     }
 }

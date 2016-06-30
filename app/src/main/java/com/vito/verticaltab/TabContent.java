@@ -14,29 +14,48 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "TabInfo"
+        "contentHead",
+        "contentBody"
 })
-public class TabContentBean {
+public class TabContent {
 
-    @JsonProperty("TabInfo")
-    private List<TabInfo> tabInfo = new ArrayList<TabInfo>();
+    @JsonProperty("contentHead")
+    private String contentHead;
+    @JsonProperty("contentBody")
+    private List<ContentBody> contentBody = new ArrayList<ContentBody>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
-     * @return The tabInfo
+     * @return The contentHead
      */
-    @JsonProperty("TabInfo")
-    public List<TabInfo> getTabInfo() {
-        return tabInfo;
+    @JsonProperty("contentHead")
+    public String getContentHead() {
+        return contentHead;
     }
 
     /**
-     * @param tabInfo The TabInfo
+     * @param contentHead The contentHead
      */
-    @JsonProperty("TabInfo")
-    public void setTabInfo(List<TabInfo> tabInfo) {
-        this.tabInfo = tabInfo;
+    @JsonProperty("contentHead")
+    public void setContentHead(String contentHead) {
+        this.contentHead = contentHead;
+    }
+
+    /**
+     * @return The contentBody
+     */
+    @JsonProperty("contentBody")
+    public List<ContentBody> getContentBody() {
+        return contentBody;
+    }
+
+    /**
+     * @param contentBody The contentBody
+     */
+    @JsonProperty("contentBody")
+    public void setContentBody(List<ContentBody> contentBody) {
+        this.contentBody = contentBody;
     }
 
     @JsonAnyGetter
