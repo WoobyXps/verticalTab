@@ -9,17 +9,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
+
         <ScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:divider="@color/tab_item_stroke"
-            android:showDividers="end"/>
+            android:layout_height="match_parent">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:divider="@color/tab_item_stroke"
+                android:showDividers="end"/>
         </ScrollView>
+
         <FrameLayout
             android:id="@android:id/tabcontent"
             android:layout_width="0dip"
