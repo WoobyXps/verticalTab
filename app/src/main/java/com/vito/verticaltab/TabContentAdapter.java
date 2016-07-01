@@ -29,7 +29,7 @@ public class TabContentAdapter extends BaseViewAdapter<ContentBody> implements S
     public long getHeaderId(int i) {
         Log.d("qh","i : " + i);
         Log.d("qh","id : " + mData.get(i).getCategoryId());
-        return i-1;
+        return mData.get(i).getCategoryId();
     }
 
     @Override

@@ -30,7 +30,6 @@ import java.util.Map;
  * Created by pc on 2016/6/30.
  */
 public class VerticalTabView implements TabHost.TabContentFactory {
-    TabContentAdapter mTabContentAdapter;
     Activity mContext;
     TabContentBean contentBean;
     private GridView mTabContentGridView;
@@ -44,12 +43,8 @@ public class VerticalTabView implements TabHost.TabContentFactory {
         tabHost.setup();
         JsonLoader jsonLoader = new JsonLoader(mContext);
         contentBean = jsonLoader.genContentWithLocalJson();
-        mTabContentAdapter = new TabContentAdapter(mContext, R.layout.item);
 
         initTabWidget(tabHost, contentBean);
-        initTabContentAdapter();
-        mTabContentGridView = (GridView) mContext.findViewById(R.id.asset_grid);
-        mTabContentGridView.setAdapter(mTabContentAdapter);
     }
 
     private void initTabWidget(final TabHost tabHost, TabContentBean contentBean) {
@@ -62,7 +57,7 @@ public class VerticalTabView implements TabHost.TabContentFactory {
         for (int i = 0; i < contentBean.getTabInfo().size(); i++) {
             TabInfo tabInfo = contentBean.getTabInfo().get(i);
             Log.d("qh", tabInfo.getTabWidget());
-            tabHost.addTab(tabHost.newTabSpec("tab" + i).setIndicator(createIndicatorView(tabHost, tabInfo.getTabWidget(), null)).setContent(this));
+            tabHost.addTab(tabHost.newTabSpec(String.valueOf(i)).setIndicator(createIndicatorView(tabHost, tabInfo.getTabWidget(), null)).setContent(this));
         }
         updateTab(tabHost);
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -72,26 +67,6 @@ public class VerticalTabView implements TabHost.TabContentFactory {
             }
         });
     }
-
-    public void initTabContentAdapter() {
-//        ArrayList<TabContentBean> list = new ArrayList<>();
-//        TabContentBean bean1 = new TabContentBean();
-//        bean1.setTitle("AAAA");
-//        TabContentBean bean2 = new TabContentBean();
-//        bean2.setTitle("BBBB");
-//        TabContentBean bean3 = new TabContentBean();
-//        bean3.setTitle("CCCC");
-//        list.add(bean1);
-//        list.add(bean2);
-//        list.add(bean3);
-//        list.add(bean3);
-//        list.add(bean3);
-//        list.add(bean3);
-//        list.add(bean3);
-//
-//        mTabContentAdapter.setData();
-    }
-
     /**
      * 更新Tab标签的颜色，和字体的颜色
      *
@@ -116,6 +91,23 @@ public class VerticalTabView implements TabHost.TabContentFactory {
 
             }
         }
+        TabContentAdapter  mTabContentAdapter = new TabContentAdapter(mContext, R.layout.item);
+
+        int tabId = Integer.valueOf(tabHost.getCurrentTabTag());
+        Log.d("qh","tab : " + tabId);
+        List<TabContent> contents = contentBean.getTabInfo().get(tabId).getTabContent();
+        ArrayList<ContentBody> contentBodyList = new ArrayList<>();
+        for (TabContent content : contents) {
+            for (ContentBody body : content.getContentBody()) {
+                body.setCategory(content.getContentHead());
+                contentBodyList.add(body);
+            }
+        }
+
+        mTabContentAdapter.setData(generateHeaderId(contentBodyList));
+        GridView  mTabContentGridView = (GridView) mContext.findViewById(R.id.asset_grid);
+        mTabContentGridView.setAdapter(mTabContentAdapter);
+
     }
 
 
@@ -138,16 +130,6 @@ public class VerticalTabView implements TabHost.TabContentFactory {
 
     @Override
     public View createTabContent(String tag) {
-        List<TabContent> contents = contentBean.getTabInfo().get(0).getTabContent();
-        ArrayList<ContentBody> contentBodyList = new ArrayList<>();
-        for (TabContent content : contents) {
-            for (ContentBody body : content.getContentBody()) {
-                body.setCategory(content.getContentHead());
-                contentBodyList.add(body);
-            }
-        }
-
-        mTabContentAdapter.setData(contentBodyList);
 
 
         final TextView tv = new TextView(mContext);
@@ -160,18 +142,16 @@ public class VerticalTabView implements TabHost.TabContentFactory {
         Map<String, Integer> mHeaderIdMap = new HashMap<String, Integer>();
         int mHeaderId = 1;
         List<ContentBody> hasHeaderIdList;
+        for(ContentBody contentBody : nonHeaderIdList){
 
-        for(ListIterator<ContentBody> it = nonHeaderIdList.listIterator(); it.hasNext();){
-            ContentBody contentBody = it.next();
-
-            ContentBody mGridItem = it.next();
             String category = contentBody.getCategory();
+            Log.d("qh","category : " + category);
             if(!mHeaderIdMap.containsKey(category)){
-                mGridItem.setCategoryId(mHeaderId);
+                contentBody.setCategoryId(mHeaderId);
                 mHeaderIdMap.put(category, mHeaderId);
                 mHeaderId ++;
             }else{
-                mGridItem.setCategoryId(mHeaderIdMap.get(category));
+                contentBody.setCategoryId(mHeaderIdMap.get(category));
             }
         }
         hasHeaderIdList = nonHeaderIdList;
