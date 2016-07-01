@@ -1,17 +1,24 @@
 package com.vito.verticaltab;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tonicartos.widget.stickygridheaders.StickyGridHeadersSimpleAdapter;
+import com.vito.verticaltab.bean.ContentBody;
+import com.vito.verticaltab.bean.TabContent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by pc on 2016/6/30.
  */
 public class TabContentAdapter extends BaseViewAdapter<ContentBody> implements StickyGridHeadersSimpleAdapter {
+    private List<ContentBody> mContentBodyList = new ArrayList<>();
     public TabContentAdapter(Context context, int layoutId) {
         super(context, layoutId);
         mInflater = LayoutInflater.from(context);
@@ -20,7 +27,9 @@ public class TabContentAdapter extends BaseViewAdapter<ContentBody> implements S
 
     @Override
     public long getHeaderId(int i) {
-        return 0;
+        Log.d("qh","i : " + i);
+        Log.d("qh","id : " + mData.get(i).getCategoryId());
+        return i-1;
     }
 
     @Override
@@ -35,7 +44,9 @@ public class TabContentAdapter extends BaseViewAdapter<ContentBody> implements S
         } else {
             mHeaderHolder = (HeaderViewHolder) convertView.getTag();
         }
-        mHeaderHolder.mTextView.setText("header");
+        ContentBody body = getItem(position);
+        Log.d("qh","head position: "+ position);
+        mHeaderHolder.mTextView.setText(body.getCategory());
 
         return convertView;
     }
@@ -53,10 +64,19 @@ public class TabContentAdapter extends BaseViewAdapter<ContentBody> implements S
 
         } else
             viewholder = (ViewHolder) convertView.getTag();
-
-        ContentBody tempbean = getItem(position);
-        viewholder.titleView.setText(tempbean.getItemName());
+        ContentBody body = getItem(position);
+//
+        viewholder.titleView.setText(body.getItemName());
+        Log.d("qh","position" + position );
         return convertView;
+    }
+
+    public List<ContentBody> getContentBodyList() {
+        return mContentBodyList;
+    }
+
+    public void setContentBodyList(List<ContentBody> contentBodyList) {
+        mContentBodyList = contentBodyList;
     }
 
     public final class ViewHolder {

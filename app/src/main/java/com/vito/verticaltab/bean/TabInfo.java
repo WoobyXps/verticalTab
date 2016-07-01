@@ -1,4 +1,4 @@
-package com.vito.verticaltab;
+package com.vito.verticaltab.bean;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -14,48 +14,48 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "contentHead",
-        "contentBody"
+        "tabWidget",
+        "tabContent"
 })
-public class TabContent {
+public class TabInfo {
 
-    @JsonProperty("contentHead")
-    private String contentHead;
-    @JsonProperty("contentBody")
-    private List<ContentBody> contentBody = new ArrayList<ContentBody>();
+    @JsonProperty("tabWidget")
+    private String tabWidget;
+    @JsonProperty("tabContent")
+    private List<TabContent> tabContent = new ArrayList<TabContent>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
-     * @return The contentHead
+     * @return The tabWidget
      */
-    @JsonProperty("contentHead")
-    public String getContentHead() {
-        return contentHead;
+    @JsonProperty("tabWidget")
+    public String getTabWidget() {
+        return tabWidget;
     }
 
     /**
-     * @param contentHead The contentHead
+     * @param tabWidget The tabWidget
      */
-    @JsonProperty("contentHead")
-    public void setContentHead(String contentHead) {
-        this.contentHead = contentHead;
+    @JsonProperty("tabWidget")
+    public void setTabWidget(String tabWidget) {
+        this.tabWidget = tabWidget;
     }
 
     /**
-     * @return The contentBody
+     * @return The tabContent
      */
-    @JsonProperty("contentBody")
-    public List<ContentBody> getContentBody() {
-        return contentBody;
+    @JsonProperty("tabContent")
+    public List<TabContent> getTabContent() {
+        return tabContent;
     }
 
     /**
-     * @param contentBody The contentBody
+     * @param tabContent The tabContent
      */
-    @JsonProperty("contentBody")
-    public void setContentBody(List<ContentBody> contentBody) {
-        this.contentBody = contentBody;
+    @JsonProperty("tabContent")
+    public void setTabContent(List<TabContent> tabContent) {
+        this.tabContent = tabContent;
     }
 
     @JsonAnyGetter

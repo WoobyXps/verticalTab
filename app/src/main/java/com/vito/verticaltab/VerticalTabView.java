@@ -15,8 +15,16 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+import com.vito.verticaltab.bean.ContentBody;
+import com.vito.verticaltab.bean.TabContent;
+import com.vito.verticaltab.bean.TabContentBean;
+import com.vito.verticaltab.bean.TabInfo;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.Map;
 
 /**
  * Created by pc on 2016/6/30.
@@ -24,6 +32,7 @@ import java.util.List;
 public class VerticalTabView implements TabHost.TabContentFactory {
     TabContentAdapter mTabContentAdapter;
     Activity mContext;
+    TabContentBean contentBean;
     private GridView mTabContentGridView;
 
     public VerticalTabView(Activity context) {
@@ -34,25 +43,26 @@ public class VerticalTabView implements TabHost.TabContentFactory {
         final TabHost tabHost = (TabHost) mContext.findViewById(R.id.tabHost);
         tabHost.setup();
         JsonLoader jsonLoader = new JsonLoader(mContext);
-        TabContentBean contentBean = jsonLoader.genContentWithLocalJson();
+        contentBean = jsonLoader.genContentWithLocalJson();
+        mTabContentAdapter = new TabContentAdapter(mContext, R.layout.item);
 
-        initTabWidget(tabHost,contentBean);
-//        initTabContentAdapter();
+        initTabWidget(tabHost, contentBean);
+        initTabContentAdapter();
         mTabContentGridView = (GridView) mContext.findViewById(R.id.asset_grid);
-//        mTabContentGridView.setAdapter(mTabContentAdapter);
+        mTabContentGridView.setAdapter(mTabContentAdapter);
     }
 
-    private void initTabWidget(final TabHost tabHost ,TabContentBean contentBean) {
+    private void initTabWidget(final TabHost tabHost, TabContentBean contentBean) {
 
         TabWidget tw = tabHost.getTabWidget();
 
         tw.setOrientation(LinearLayout.VERTICAL);
-        Log.d("qh","size : " + contentBean.getTabInfo().size());
+        Log.d("qh", "size : " + contentBean.getTabInfo().size());
 
-        for (int i=0;i<contentBean.getTabInfo().size();i++){
-            TabInfo tabInfo =   contentBean.getTabInfo().get(i);
-            Log.d("qh",tabInfo.getTabWidget());
-            tabHost.addTab(tabHost.newTabSpec("tab"+i).setIndicator(createIndicatorView(tabHost,tabInfo.getTabWidget(),null)).setContent(this));
+        for (int i = 0; i < contentBean.getTabInfo().size(); i++) {
+            TabInfo tabInfo = contentBean.getTabInfo().get(i);
+            Log.d("qh", tabInfo.getTabWidget());
+            tabHost.addTab(tabHost.newTabSpec("tab" + i).setIndicator(createIndicatorView(tabHost, tabInfo.getTabWidget(), null)).setContent(this));
         }
         updateTab(tabHost);
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
@@ -63,8 +73,7 @@ public class VerticalTabView implements TabHost.TabContentFactory {
         });
     }
 
-    public void initTabContentAdapter(List<ContentBody> list) {
-        mTabContentAdapter = new TabContentAdapter(mContext, R.layout.item);
+    public void initTabContentAdapter() {
 //        ArrayList<TabContentBean> list = new ArrayList<>();
 //        TabContentBean bean1 = new TabContentBean();
 //        bean1.setTitle("AAAA");
@@ -129,10 +138,46 @@ public class VerticalTabView implements TabHost.TabContentFactory {
 
     @Override
     public View createTabContent(String tag) {
+        List<TabContent> contents = contentBean.getTabInfo().get(0).getTabContent();
+        ArrayList<ContentBody> contentBodyList = new ArrayList<>();
+        for (TabContent content : contents) {
+            for (ContentBody body : content.getContentBody()) {
+                body.setCategory(content.getContentHead());
+                contentBodyList.add(body);
+            }
+        }
+
+        mTabContentAdapter.setData(contentBodyList);
+
+
         final TextView tv = new TextView(mContext);
-        return tv;
+            return tv;
+
     }
 
-    private void getDateFromJson(){
+
+    private List<ContentBody> generateHeaderId(List<ContentBody> nonHeaderIdList) {
+        Map<String, Integer> mHeaderIdMap = new HashMap<String, Integer>();
+        int mHeaderId = 1;
+        List<ContentBody> hasHeaderIdList;
+
+        for(ListIterator<ContentBody> it = nonHeaderIdList.listIterator(); it.hasNext();){
+            ContentBody contentBody = it.next();
+
+            ContentBody mGridItem = it.next();
+            String category = contentBody.getCategory();
+            if(!mHeaderIdMap.containsKey(category)){
+                mGridItem.setCategoryId(mHeaderId);
+                mHeaderIdMap.put(category, mHeaderId);
+                mHeaderId ++;
+            }else{
+                mGridItem.setCategoryId(mHeaderIdMap.get(category));
+            }
+        }
+        hasHeaderIdList = nonHeaderIdList;
+
+        return hasHeaderIdList;
+    }
+    private void getDateFromJson() {
     }
 }

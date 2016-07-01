@@ -1,4 +1,4 @@
-package com.vito.verticaltab;
+package com.vito.verticaltab.bean;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -23,6 +23,8 @@ public class ContentBody {
     private String itemImage;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private String category;
+    private long categoryId;
 
     /**
      * @return The itemName
@@ -66,4 +68,19 @@ public class ContentBody {
         this.additionalProperties.put(name, value);
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
+    }
 }

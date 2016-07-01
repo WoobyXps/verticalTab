@@ -1,4 +1,4 @@
-package com.vito.verticaltab;
+package com.vito.verticaltab.bean;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -14,48 +14,29 @@ import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-        "tabWidget",
-        "tabContent"
+        "TabInfo"
 })
-public class TabInfo {
+public class TabContentBean {
 
-    @JsonProperty("tabWidget")
-    private String tabWidget;
-    @JsonProperty("tabContent")
-    private List<TabContent> tabContent = new ArrayList<TabContent>();
+    @JsonProperty("TabInfo")
+    private List<TabInfo> tabInfo = new ArrayList<TabInfo>();
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
-     * @return The tabWidget
+     * @return The tabInfo
      */
-    @JsonProperty("tabWidget")
-    public String getTabWidget() {
-        return tabWidget;
+    @JsonProperty("TabInfo")
+    public List<TabInfo> getTabInfo() {
+        return tabInfo;
     }
 
     /**
-     * @param tabWidget The tabWidget
+     * @param tabInfo The TabInfo
      */
-    @JsonProperty("tabWidget")
-    public void setTabWidget(String tabWidget) {
-        this.tabWidget = tabWidget;
-    }
-
-    /**
-     * @return The tabContent
-     */
-    @JsonProperty("tabContent")
-    public List<TabContent> getTabContent() {
-        return tabContent;
-    }
-
-    /**
-     * @param tabContent The tabContent
-     */
-    @JsonProperty("tabContent")
-    public void setTabContent(List<TabContent> tabContent) {
-        this.tabContent = tabContent;
+    @JsonProperty("TabInfo")
+    public void setTabInfo(List<TabInfo> tabInfo) {
+        this.tabInfo = tabInfo;
     }
 
     @JsonAnyGetter
