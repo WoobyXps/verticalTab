@@ -3,7 +3,7 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="text_selected">#52B2F6</color>
+    <color name="text_selected">#47B24F</color>
     <color name="text_not_select">#363636</color>
     <color name="base_bg">#F8F8F8</color>
     <color name="tab_item_stroke">#E1E1E1</color>
@@ -11,4 +11,5 @@
 
     <color name="search_bar_stroke">#F0F0F0</color>
     <color name="search_bar_solid">#FDFDFE</color>
+    <color name="search_bar_hint">#AAAAAA</color>
 </resources>
